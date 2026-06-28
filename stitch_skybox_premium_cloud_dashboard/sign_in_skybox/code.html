@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SkyBox - Login</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        /* Essential overrides and utility classes for glassmorphism */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(0, 74, 198, 0.05); /* subtle primary tinted shadow */
+        }
+        
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Abstract Background Animation */
+        @keyframes float1 {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -50px) scale(1.1); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+        @keyframes float2 {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-40px, 40px) scale(0.95); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+        .bg-orb-1 {
+            animation: float1 15s ease-in-out infinite;
+        }
+        .bg-orb-2 {
+            animation: float2 18s ease-in-out infinite reverse;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#adc6ff",
+                        "on-secondary-fixed": "#001a42",
+                        "outline-variant": "#c3c6d7",
+                        "surface-tint": "#0053db",
+                        "secondary": "#0058be",
+                        "on-tertiary-container": "#ffede6",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#ededf9",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#2170e4",
+                        "surface-dim": "#d9d9e5",
+                        "on-surface-variant": "#434655",
+                        "outline": "#737686",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#943700",
+                        "surface-container-highest": "#e1e2ed",
+                        "tertiary-container": "#bc4800",
+                        "surface-bright": "#faf8ff",
+                        "inverse-surface": "#2e3039",
+                        "on-secondary-container": "#fefcff",
+                        "surface-variant": "#e1e2ed",
+                        "tertiary-fixed": "#ffdbcd",
+                        "primary-fixed": "#dbe1ff",
+                        "inverse-primary": "#b4c5ff",
+                        "primary": "#004ac6",
+                        "on-secondary": "#ffffff",
+                        "surface": "#faf8ff",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "secondary-fixed": "#d8e2ff",
+                        "on-tertiary-fixed": "#360f00",
+                        "on-primary-fixed": "#00174b",
+                        "inverse-on-surface": "#f0f0fb",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#e7e7f3",
+                        "on-primary-container": "#eeefff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "background": "#faf8ff",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "on-background": "#191b23",
+                        "surface-container-low": "#f3f3fe",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#004395",
+                        "on-surface": "#191b23",
+                        "primary-container": "#2563eb"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin_mobile": "16px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "container_max": "1440px",
+                        "margin_desktop": "32px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "3xl": "64px",
+                        "2xl": "48px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "title-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "title-md": ["18px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background min-h-screen flex items-center justify-center relative overflow-hidden font-body-md text-body-md text-on-surface antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Abstract Aero-Minimalism Background Elements -->
+<div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+<div class="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-primary-fixed-dim/40 rounded-full mix-blend-multiply filter blur-[100px] bg-orb-1 opacity-70"></div>
+<div class="absolute bottom-[-15%] right-[-5%] w-[700px] h-[700px] bg-secondary-fixed/50 rounded-full mix-blend-multiply filter blur-[120px] bg-orb-2 opacity-60"></div>
+</div>
+<!-- Main Container -->
+<main class="w-full max-w-[420px] px-margin_mobile md:px-0 relative z-10">
+<!-- Glassmorphic Login Card -->
+<div class="glass-panel rounded-xl p-xl shadow-lg relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/40 before:to-white/10 before:z-[-1]">
+<!-- Header Section -->
+<div class="flex flex-col items-center mb-xl text-center">
+<div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-sm shadow-inner border border-primary/20">
+<span class="material-symbols-outlined text-primary text-[32px]" style="font-variation-settings: 'FILL' 1;">cloud</span>
+</div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight">SkyBox</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Sign in to manage your files</p>
+</div>
+<!-- Login Form -->
+<form action="#" class="space-y-md" method="POST">
+<!-- Email Field -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-xs" for="email">Email Address</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-sm flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline-variant text-[20px]">mail</span>
+</div>
+<input class="block w-full pl-[40px] pr-sm py-[10px] rounded-lg border border-outline-variant/60 bg-surface/50 text-on-surface font-body-md text-body-md focus:ring-2 focus:ring-primary focus:border-primary focus:bg-surface transition-all placeholder:text-outline-variant outline-none" id="email" name="email" placeholder="you@company.com" required="" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div>
+<div class="flex justify-between items-center mb-xs">
+<label class="block font-label-md text-label-md text-on-surface-variant" for="password">Password</label>
+<a class="font-label-md text-label-md text-primary hover:text-primary-container transition-colors" href="#">Forgot Password?</a>
+</div>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-sm flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline-variant text-[20px]">lock</span>
+</div>
+<input class="block w-full pl-[40px] pr-[40px] py-[10px] rounded-lg border border-outline-variant/60 bg-surface/50 text-on-surface font-body-md text-body-md focus:ring-2 focus:ring-primary focus:border-primary focus:bg-surface transition-all placeholder:text-outline-variant outline-none" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute inset-y-0 right-0 pr-sm flex items-center text-outline-variant hover:text-on-surface transition-colors focus:outline-none" id="togglePassword" type="button">
+<span class="material-symbols-outlined text-[20px]" id="toggleIcon">visibility_off</span>
+</button>
+</div>
+</div>
+<!-- Submit Button -->
+<button class="w-full flex justify-center py-[12px] px-4 border border-transparent rounded-lg shadow-sm font-label-md text-label-md font-semibold text-on-primary bg-primary hover:bg-primary-container focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all active:scale-[0.98]" type="submit">
+                    Sign In
+                </button>
+</form>
+<!-- Divider -->
+<div class="mt-lg mb-lg relative">
+<div aria-hidden="true" class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-outline-variant/40"></div>
+</div>
+<div class="relative flex justify-center">
+<span class="px-sm bg-surface-bright/80 backdrop-blur-sm rounded-full font-label-sm text-label-sm text-on-surface-variant tracking-wider uppercase">or continue with</span>
+</div>
+</div>
+<!-- Social Logins -->
+<div class="grid grid-cols-2 gap-sm">
+<button class="w-full inline-flex justify-center items-center py-[10px] px-4 border border-outline-variant/60 rounded-lg bg-surface/50 hover:bg-surface font-label-md text-label-md text-on-surface transition-all focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-primary" type="button">
+<svg class="h-5 w-5 mr-xs" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+                    Google
+                </button>
+<button class="w-full inline-flex justify-center items-center py-[10px] px-4 border border-outline-variant/60 rounded-lg bg-surface/50 hover:bg-surface font-label-md text-label-md text-on-surface transition-all focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-primary" type="button">
+<svg aria-hidden="true" class="h-5 w-5 mr-xs" fill="currentColor" viewbox="0 0 24 24">
+<path clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" fill-rule="evenodd"></path>
+</svg>
+                    GitHub
+                </button>
+</div>
+<!-- Footer Sign up CTA -->
+<p class="mt-lg text-center font-body-md text-body-md text-on-surface-variant">
+                Don't have an account? 
+                <a class="font-label-md text-label-md text-primary hover:text-primary-container font-semibold transition-colors" href="#">Sign up</a>
+</p>
+</div>
+</main>
+<!-- Script for Password Toggle -->
+<script>
+        const togglePassword = document.getElementById('togglePassword');
+        const password = document.getElementById('password');
+        const toggleIcon = document.getElementById('toggleIcon');
+
+        togglePassword.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            
+            // toggle the icon
+            if(type === 'password') {
+                toggleIcon.textContent = 'visibility_off';
+            } else {
+                toggleIcon.textContent = 'visibility';
+            }
+        });
+    </script>
+</body></html>

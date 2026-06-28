@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SkyBox Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed-dim": "#adc6ff",
+                      "on-secondary-fixed": "#001a42",
+                      "outline-variant": "#c3c6d7",
+                      "surface-tint": "#0053db",
+                      "secondary": "#0058be",
+                      "on-tertiary-container": "#ffede6",
+                      "error-container": "#ffdad6",
+                      "surface-container": "#ededf9",
+                      "on-error-container": "#93000a",
+                      "secondary-container": "#2170e4",
+                      "surface-dim": "#d9d9e5",
+                      "on-surface-variant": "#434655",
+                      "outline": "#737686",
+                      "on-primary": "#ffffff",
+                      "tertiary": "#943700",
+                      "surface-container-highest": "#e1e2ed",
+                      "tertiary-container": "#bc4800",
+                      "surface-bright": "#faf8ff",
+                      "inverse-surface": "#2e3039",
+                      "on-secondary-container": "#fefcff",
+                      "surface-variant": "#e1e2ed",
+                      "tertiary-fixed": "#ffdbcd",
+                      "primary-fixed": "#dbe1ff",
+                      "inverse-primary": "#b4c5ff",
+                      "primary": "#004ac6",
+                      "on-secondary": "#ffffff",
+                      "surface": "#faf8ff",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "secondary-fixed": "#d8e2ff",
+                      "on-tertiary-fixed": "#360f00",
+                      "on-primary-fixed": "#00174b",
+                      "inverse-on-surface": "#f0f0fb",
+                      "error": "#ba1a1a",
+                      "on-error": "#ffffff",
+                      "surface-container-high": "#e7e7f3",
+                      "on-primary-container": "#eeefff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary-fixed-variant": "#7d2d00",
+                      "background": "#faf8ff",
+                      "tertiary-fixed-dim": "#ffb596",
+                      "on-background": "#191b23",
+                      "surface-container-low": "#f3f3fe",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed-variant": "#004395",
+                      "on-surface": "#191b23",
+                      "primary-container": "#2563eb"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin_mobile": "16px",
+                      "md": "16px",
+                      "xl": "32px",
+                      "xs": "4px",
+                      "container_max": "1440px",
+                      "margin_desktop": "32px",
+                      "gutter": "24px",
+                      "unit": "4px",
+                      "sm": "8px",
+                      "lg": "24px",
+                      "3xl": "64px",
+                      "2xl": "48px"
+              },
+              "fontFamily": {
+                      "label-sm": ["Inter"],
+                      "body-md": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "title-md": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "title-md": ["18px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        /* Aero-Minimalism Utilities */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+        .dark .glass-panel {
+            background: rgba(30, 30, 30, 0.7);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        @keyframes progress {
+            0% { stroke-dasharray: 0 100; }
+        }
+        .progress-ring-circle {
+            transition: stroke-dasharray 1s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-surface/70 dark:bg-inverse-surface/70 backdrop-blur-xl docked full-width top-0 sticky border-b border-outline-variant/30 dark:border-outline/20 shadow-sm flex justify-between items-center w-full px-lg py-sm max-w-container_max mx-auto z-50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed" data-weight="fill">cloud</span>
+<span class="font-display-lg text-display-lg tracking-tighter text-primary dark:text-primary-fixed" style="font-size: 24px; line-height: 32px;">SkyBox</span>
+</div>
+<div class="flex items-center gap-4 text-primary dark:text-primary-fixed-dim font-body-md text-body-md">
+<button class="hover:bg-surface-container-high/50 dark:hover:bg-surface-dim/20 transition-all duration-300 p-2 rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="hover:bg-surface-container-high/50 dark:hover:bg-surface-dim/20 transition-all duration-300 p-2 rounded-full">
+<span class="material-symbols-outlined">contrast</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden cursor-pointer hover:opacity-80 active:opacity-80 active:scale-95 transition-transform">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4z4Z-AbRr3XtZsvQH_fKqreDrl1KdX-1Sm_4OuxAcRaltJAyAxydFvqVgHtC30suAsZJqMexgb5A0NZfX4jGmSEdJWj6JQahTvZXYo7kSxJMoFDWLG8hiR8A2Me2_HHK9bSAiIaVyn2lBAHkoT0jlyvc7ZaCrW3zBOk6q3yGbuVdwvalzlVEG95tORf7Q8EnJrY4lNSs81QQRz3UgGzbe9nRZn620NsdKXyyK-4lvE8ALMYxWQz1pgvONClvh9BgKI0Pw6H741csD"/>
+</div>
+</div>
+</header>
+<div class="flex h-[calc(100vh-64px)] max-w-container_max mx-auto">
+<!-- SideNavBar -->
+<nav class="bg-surface dark:bg-on-secondary-fixed fixed left-0 top-16 h-[calc(100vh-64px)] w-[280px] border-r border-outline-variant/50 flex flex-col p-md gap-sm z-40 hidden md:flex">
+<div class="flex flex-col gap-1 mt-4">
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-xl font-semibold active:scale-[0.98] transition-transform" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low rounded-xl hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+<span class="font-label-md text-label-md">My Files</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low rounded-xl hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">schedule</span>
+<span class="font-label-md text-label-md">Recent</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low rounded-xl hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">star</span>
+<span class="font-label-md text-label-md">Favorites</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low rounded-xl hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">share</span>
+<span class="font-label-md text-label-md">Shared</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low rounded-xl hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">delete</span>
+<span class="font-label-md text-label-md">Trash</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low rounded-xl hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">cloud</span>
+<span class="font-label-md text-label-md">Storage</span>
+</a>
+</div>
+<div class="mt-auto flex flex-col gap-1">
+<button class="bg-primary text-on-primary font-label-md text-label-md py-3 rounded-xl hover:opacity-90 transition-opacity mb-4">
+                    Upgrade Plan
+                </button>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low rounded-xl hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-low rounded-xl hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Help</span>
+</a>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 md:ml-[280px] p-margin_desktop overflow-y-auto">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-lg">Dashboard</h1>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg mb-lg">
+<!-- Storage Overview Widget -->
+<div class="glass-panel rounded-[16px] p-lg flex flex-col justify-between">
+<h2 class="font-title-md text-title-md text-on-surface mb-4">Storage Overview</h2>
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-headline-lg text-primary">64 GB</span>
+<span class="font-body-md text-on-surface-variant">of 100 GB used</span>
+</div>
+<div class="relative w-24 h-24">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-variant" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<path class="text-primary-container progress-ring-circle" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="64, 100" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="font-title-md text-on-surface">64%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Storage Breakdown -->
+<div class="glass-panel rounded-[16px] p-lg flex flex-col">
+<h2 class="font-title-md text-title-md text-on-surface mb-4">Storage Breakdown</h2>
+<div class="flex-1 flex flex-col justify-center gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary-container"></div>
+<span class="font-body-md text-on-surface">Images</span>
+</div>
+<span class="font-body-md text-on-surface-variant">32 GB</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-secondary-container"></div>
+<span class="font-body-md text-on-surface">Documents</span>
+</div>
+<span class="font-body-md text-on-surface-variant">20 GB</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-tertiary-container"></div>
+<span class="font-body-md text-on-surface">Videos</span>
+</div>
+<span class="font-body-md text-on-surface-variant">12 GB</span>
+</div>
+<div class="w-full h-2 bg-surface-variant rounded-full overflow-hidden flex mt-2">
+<div class="h-full bg-primary-container" style="width: 50%"></div>
+<div class="h-full bg-secondary-container" style="width: 31%"></div>
+<div class="h-full bg-tertiary-container" style="width: 19%"></div>
+</div>
+</div>
+</div>
+<!-- Quick Actions -->
+<div class="glass-panel rounded-[16px] p-lg flex flex-col">
+<h2 class="font-title-md text-title-md text-on-surface mb-4">Quick Actions</h2>
+<div class="grid grid-cols-2 gap-4 flex-1">
+<button class="bg-surface-container-lowest border border-outline-variant/30 rounded-[16px] p-4 flex flex-col items-center justify-center gap-2 hover:-translate-y-1 hover:shadow-md transition-all active:scale-95 text-on-surface col-span-2">
+<span class="material-symbols-outlined text-primary-container">upload</span>
+<span class="font-label-md text-label-md">Upload File</span>
+</button>
+<button class="bg-surface-container-lowest border border-outline-variant/30 rounded-[16px] p-4 flex flex-col items-center justify-center gap-2 hover:-translate-y-1 hover:shadow-md transition-all active:scale-95 text-on-surface">
+<span class="material-symbols-outlined text-secondary-container">create_new_folder</span>
+<span class="font-label-md text-label-md">New Folder</span>
+</button>
+<button class="bg-surface-container-lowest border border-outline-variant/30 rounded-[16px] p-4 flex flex-col items-center justify-center gap-2 hover:-translate-y-1 hover:shadow-md transition-all active:scale-95 text-on-surface">
+<span class="material-symbols-outlined text-tertiary-container">share</span>
+<span class="font-label-md text-label-md">Share</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Quick Access Files & Activity -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<div class="lg:col-span-2 flex flex-col gap-md">
+<div class="flex justify-between items-center">
+<h2 class="font-title-md text-title-md text-on-surface">Quick Access</h2>
+<button class="text-primary-container font-label-md text-label-md hover:underline">View All</button>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-md">
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-[16px] p-md flex flex-col gap-sm hover:-translate-y-1 hover:shadow-md transition-all cursor-pointer">
+<div class="w-full h-24 rounded-lg bg-surface-variant flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-primary-container text-4xl">description</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface truncate">Q3_Report.pdf</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">2.4 MB</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-[16px] p-md flex flex-col gap-sm hover:-translate-y-1 hover:shadow-md transition-all cursor-pointer">
+<div class="w-full h-24 rounded-lg bg-surface-variant flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-secondary-container text-4xl">image</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface truncate">Hero_Banner.png</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">5.1 MB</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-[16px] p-md flex flex-col gap-sm hover:-translate-y-1 hover:shadow-md transition-all cursor-pointer">
+<div class="w-full h-24 rounded-lg bg-surface-variant flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-tertiary-container text-4xl">movie</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface truncate">Product_Demo.mp4</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">45 MB</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-[16px] p-md flex flex-col gap-sm hover:-translate-y-1 hover:shadow-md transition-all cursor-pointer hidden sm:flex">
+<div class="w-full h-24 rounded-lg bg-surface-variant flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-primary-container text-4xl">folder</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface truncate">Design Assets</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">1.2 GB</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-md">
+<h2 class="font-title-md text-title-md text-on-surface">Recent Activity</h2>
+<div class="glass-panel rounded-[16px] p-md flex flex-col gap-4 flex-1">
+<div class="flex gap-sm">
+<div class="flex flex-col items-center mt-1">
+<div class="w-2 h-2 rounded-full bg-primary-container"></div>
+<div class="w-px h-full bg-outline-variant/50 my-1"></div>
+</div>
+<div class="flex flex-col pb-2">
+<span class="font-body-md text-body-md text-on-surface">You uploaded <span class="font-medium">Q3_Report.pdf</span></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">2 hours ago</span>
+</div>
+</div>
+<div class="flex gap-sm">
+<div class="flex flex-col items-center mt-1">
+<div class="w-2 h-2 rounded-full bg-secondary-container"></div>
+<div class="w-px h-full bg-outline-variant/50 my-1"></div>
+</div>
+<div class="flex flex-col pb-2">
+<span class="font-body-md text-body-md text-on-surface">Sarah edited <span class="font-medium">Design_System.fig</span></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Yesterday at 4:30 PM</span>
+</div>
+</div>
+<div class="flex gap-sm">
+<div class="flex flex-col items-center mt-1">
+<div class="w-2 h-2 rounded-full bg-tertiary-container"></div>
+<div class="w-px h-full bg-outline-variant/50 my-1"></div>
+</div>
+<div class="flex flex-col pb-2">
+<span class="font-body-md text-body-md text-on-surface">Shared <span class="font-medium">Product_Demo.mp4</span> with Team</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Yesterday at 2:15 PM</span>
+</div>
+</div>
+<div class="flex gap-sm">
+<div class="flex flex-col items-center mt-1">
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+</div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface">System backed up <span class="font-medium">14 items</span></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Yesterday at 2:00 AM</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script>
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => {
+                const ring = document.querySelector('.progress-ring-circle');
+                if(ring) {
+                    ring.style.strokeDasharray = '64, 100';
+                }
+            }, 100);
+        });
+    </script>
+</body></html>

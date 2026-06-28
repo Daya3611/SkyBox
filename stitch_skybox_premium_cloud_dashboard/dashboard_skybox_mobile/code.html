@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SkyBox - Mobile Dashboard</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts (Inter) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#ffb596",
+                        "surface-container-high": "#e7e7f3",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "on-primary-container": "#eeefff",
+                        "background": "#faf8ff",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f0f0fb",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed": "#00174b",
+                        "primary-container": "#2563eb",
+                        "on-secondary-fixed-variant": "#004395",
+                        "on-surface": "#191b23",
+                        "on-background": "#191b23",
+                        "surface-container-low": "#f3f3fe",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#004ac6",
+                        "inverse-primary": "#b4c5ff",
+                        "primary-fixed": "#dbe1ff",
+                        "tertiary-fixed": "#ffdbcd",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "secondary-fixed": "#d8e2ff",
+                        "on-tertiary-fixed": "#360f00",
+                        "surface": "#faf8ff",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "outline": "#737686",
+                        "surface-dim": "#d9d9e5",
+                        "on-surface-variant": "#434655",
+                        "surface-variant": "#e1e2ed",
+                        "surface-bright": "#faf8ff",
+                        "on-secondary-container": "#fefcff",
+                        "inverse-surface": "#2e3039",
+                        "tertiary-container": "#bc4800",
+                        "tertiary": "#943700",
+                        "surface-container-highest": "#e1e2ed",
+                        "secondary": "#0058be",
+                        "on-tertiary-container": "#ffede6",
+                        "outline-variant": "#c3c6d7",
+                        "surface-tint": "#0053db",
+                        "on-secondary-fixed": "#001a42",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "secondary-container": "#2170e4",
+                        "surface-container": "#ededf9",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container_max": "1440px",
+                        "gutter": "24px",
+                        "margin_desktop": "32px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "md": "16px",
+                        "margin_mobile": "16px",
+                        "lg": "24px",
+                        "3xl": "64px",
+                        "2xl": "48px",
+                        "unit": "4px",
+                        "sm": "8px",
+                        "safe": "env(safe-area-inset-bottom)"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "title-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "title-md": ["18px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Glassmorphism Utilities */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+        
+        .glass-stroke {
+            border-image: linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(255,255,255,0.2)) 1;
+        }
+
+        /* Hide scrollbar for horizontal lists */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        
+        /* Progress Ring Animation */
+        @keyframes progress {
+            0% { stroke-dasharray: 0 100; }
+        }
+        .progress-ring-circle {
+            transition: stroke-dasharray 1s ease-out;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-[80px] md:pb-0 overflow-x-hidden pt-16">
+<!-- TopAppBar -->
+<header class="bg-surface/70 dark:bg-inverse-surface/70 backdrop-blur-xl fixed top-0 w-full z-50 shadow-sm border-b border-outline-variant/30 flex justify-between items-center px-margin_mobile h-16 w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary dark:text-inverse-primary" data-weight="fill">cloud</span>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary">SkyBox</span>
+</div>
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-variant flex items-center justify-center hover:opacity-80 transition-opacity active:scale-95 transition-transform cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A macro photography shot of a sleek, minimalist blue abstract geometric shape set against a bright, airy white background. The image should convey a sense of modern technology, cloud storage, and clean design aesthetics, fitting for a user avatar placeholder in a light-mode interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAMI-FYvARti3k10ziW2WTD-tVs8AfX_fn2vjBEqNaC7Du_8s5iECySOKz1vX15Kak8liqDj2Rt1Yw0swkrSNk_MquWJQa3lR4me9wZ32mGKIri3DFOkWWZgSA-aEqD4fpfnApm3QSeuxb_t_7vp22xZgFEJZPdB7LQ_kjlXrwbKpz1XT04O1q7T_axMphfbfOXan5OAVIq09jq1fkt2upCUgEsHaQ0vikM0iINyKXDqcDKJXU7aJWF83FbKJNy0aG28RqMcxoq9UK"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="px-margin_mobile py-md md:hidden flex flex-col gap-lg">
+<!-- Storage Usage Widget (Progress Ring) -->
+<section class="glass-panel rounded-xl p-md flex flex-col gap-sm">
+<h2 class="font-title-md text-title-md text-on-surface">Storage</h2>
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary">64 GB</span>
+<span class="font-body-md text-body-md text-on-surface-variant">of 100 GB used</span>
+</div>
+<!-- SVG Progress Ring -->
+<div class="relative w-20 h-20">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<!-- Background Circle -->
+<path class="text-surface-variant" d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<!-- Progress Circle -->
+<path class="text-primary progress-ring-circle" d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="64, 100" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center flex-col">
+<span class="font-label-sm text-label-sm text-on-surface">64%</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Actions Grid -->
+<section class="grid grid-cols-3 gap-sm">
+<button class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-sm flex flex-col items-center justify-center gap-xs hover:-translate-y-1 hover:shadow-md transition-all active:scale-95 text-on-surface">
+<span class="material-symbols-outlined text-primary">upload</span>
+<span class="font-label-md text-label-md">Upload</span>
+</button>
+<button class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-sm flex flex-col items-center justify-center gap-xs hover:-translate-y-1 hover:shadow-md transition-all active:scale-95 text-on-surface">
+<span class="material-symbols-outlined text-secondary">document_scanner</span>
+<span class="font-label-md text-label-md">Scan</span>
+</button>
+<button class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-sm flex flex-col items-center justify-center gap-xs hover:-translate-y-1 hover:shadow-md transition-all active:scale-95 text-on-surface">
+<span class="material-symbols-outlined text-tertiary">create_new_folder</span>
+<span class="font-label-md text-label-md">Folder</span>
+</button>
+</section>
+<!-- Recent Files (Horizontal Scroll) -->
+<section class="flex flex-col gap-sm">
+<div class="flex justify-between items-center">
+<h2 class="font-title-md text-title-md text-on-surface">Recent Files</h2>
+<button class="text-primary font-label-md text-label-md">View All</button>
+</div>
+<div class="flex overflow-x-auto gap-md pb-xs no-scrollbar -mx-margin_mobile px-margin_mobile">
+<!-- File Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-md flex-shrink-0 w-36 flex flex-col gap-sm hover:-translate-y-1 hover:shadow-md transition-all cursor-pointer">
+<div class="w-full h-24 rounded-lg bg-surface-variant flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A pristine, light-mode minimalist 3D render of a folded document with abstract, soft blue graphical elements. The scene is brightly lit with soft, diffused studio lighting, creating a clean, airy, and professional aesthetic suitable for a modern cloud storage interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcDKRZoNjWwMH8vVdRw1B3FXJ2xzaAn3PsA715QFJfxN30MjQ5S3CaLfd5rmYapKjEevZk8Yt7skQQXdn78JyJRnohEtfvPRyAc2iSiLj9_d-wwBxmZIrydmLkr4ki4TqAAcf_FPkBwj1-aanOHfci6T7-B4-DyyDmraRgjHKSwJQRJ23LPkCtdPiwEYH35-99LUzgLQ5KPgmsU3zvmaBSEaznVcciSo66WzNLxcr0w8MzoyZ60YQ9VFjTCKMVMUmvb23PyV0orBNM"/>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface truncate">Q3_Report.pdf</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">2.4 MB • 2h ago</span>
+</div>
+</div>
+<!-- File Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-md flex-shrink-0 w-36 flex flex-col gap-sm hover:-translate-y-1 hover:shadow-md transition-all cursor-pointer">
+<div class="w-full h-24 rounded-lg bg-primary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl" data-weight="fill">image</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface truncate">Hero_Banner.png</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">5.1 MB • 5h ago</span>
+</div>
+</div>
+<!-- File Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-md flex-shrink-0 w-36 flex flex-col gap-sm hover:-translate-y-1 hover:shadow-md transition-all cursor-pointer">
+<div class="w-full h-24 rounded-lg bg-surface-variant flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A clean, modern, and minimal 3D presentation slide layout shown in isometric perspective. Bright white background with soft, ethereal shadows and subtle blue accent tones, emphasizing a lightweight, cloud-based design system aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxAQJMMGhyto9hQZzOSswvdy3wJgkBkcZoiENU0-GxDVc_UxKmhFS-pjZdunhGxyN1Pxx5LU9tOq3AC8vJd2dq9OoabR-z_NMUygcBlsmuD569v7NMdNw31gjWxeL-z-LLqzii3_bP8LS_RxxRM8JElR_SCRBzOgY-Jyhjic2O3BtUoHTf1c8QLNv1hzXidfGwGLUAGuzGxBthpZ1QWiUCf3GqQc2LJVy3lE4BxyupxeEdEzA3dn3MHNrx0dvJylZ36v7bsWYen6zX"/>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface truncate">Pitch_Deck_Final.key</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">12 MB • 1d ago</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Activity Timeline -->
+<section class="flex flex-col gap-sm pb-xl">
+<h2 class="font-title-md text-title-md text-on-surface">Activity</h2>
+<div class="glass-panel rounded-xl p-md flex flex-col gap-4">
+<!-- Activity Item 1 -->
+<div class="flex gap-sm">
+<div class="flex flex-col items-center mt-1">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-px h-full bg-outline-variant/50 my-1"></div>
+</div>
+<div class="flex flex-col pb-2">
+<span class="font-body-md text-body-md text-on-surface">You uploaded <span class="font-medium">Q3_Report.pdf</span></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">2 hours ago in Shared/Finance</span>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="flex gap-sm">
+<div class="flex flex-col items-center mt-1">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<div class="w-px h-full bg-outline-variant/50 my-1"></div>
+</div>
+<div class="flex flex-col pb-2">
+<span class="font-body-md text-body-md text-on-surface">Sarah edited <span class="font-medium">Design_System.fig</span></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Yesterday at 4:30 PM</span>
+</div>
+</div>
+<!-- Activity Item 3 -->
+<div class="flex gap-sm">
+<div class="flex flex-col items-center mt-1">
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+</div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface">System backed up <span class="font-medium">14 items</span></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Yesterday at 2:00 AM</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-surface/80 dark:bg-inverse-surface/80 backdrop-blur-xl fixed bottom-0 w-full z-50 rounded-t-xl border-t border-outline-variant/20 shadow-lg fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-safe pt-2 md:hidden pb-4">
+<!-- Home (Active) -->
+<button class="flex flex-col items-center justify-center text-primary dark:text-inverse-primary bg-primary-container/30 dark:bg-primary-container/10 rounded-xl px-3 py-1 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-weight="fill">home</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</button>
+<!-- Files -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-3 py-1 hover:bg-surface-container-high/50 dark:hover:bg-surface-container-high/20 active:scale-90 transition-all duration-200 rounded-xl">
+<span class="material-symbols-outlined">folder_open</span>
+<span class="font-label-md text-label-md mt-1">Files</span>
+</button>
+<!-- Upload (FAB style integration in nav) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-3 py-1 hover:bg-surface-container-high/50 dark:hover:bg-surface-container-high/20 active:scale-90 transition-all duration-200 rounded-xl -mt-4 relative">
+<div class="bg-primary text-on-primary rounded-full p-2 shadow-md">
+<span class="material-symbols-outlined text-2xl">add_circle</span>
+</div>
+<span class="font-label-md text-label-md mt-1 text-primary">Upload</span>
+</button>
+<!-- Shared -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-3 py-1 hover:bg-surface-container-high/50 dark:hover:bg-surface-container-high/20 active:scale-90 transition-all duration-200 rounded-xl">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md mt-1">Shared</span>
+</button>
+<!-- Settings -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-3 py-1 hover:bg-surface-container-high/50 dark:hover:bg-surface-container-high/20 active:scale-90 transition-all duration-200 rounded-xl">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md mt-1">Settings</span>
+</button>
+</nav>
+<script>
+        // Simple script to trigger the progress ring animation on load
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => {
+                const ring = document.querySelector('.progress-ring-circle');
+                if(ring) {
+                    ring.style.strokeDasharray = '64, 100';
+                }
+            }, 100);
+        });
+    </script>
+</body></html>

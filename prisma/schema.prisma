@@ -1,0 +1,292 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  USER
+  ADMIN
+  SUPER_ADMIN
+}
+
+model User {
+  id            String        @id @default(cuid())
+  name          String?
+  email         String        @unique
+  emailVerified DateTime?
+  password      String?       // Hashed, nullable for OAuth users
+  image         String?
+  role          Role          @default(USER)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  accounts      Account[]
+  sessions      Session[]
+  folders       Folder[]
+  files         File[]
+  activityLogs  ActivityLog[]
+  subscription  UserSubscription?
+  storageQuota  StorageQuota?
+  payments      Payment[]
+  subscriptionHistory SubscriptionHistory[]
+}
+
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String? @db.Text
+  access_token       String? @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String? @db.Text
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Folder {
+  id        String   @id @default(cuid())
+  userId    String
+  name      String
+  parentId   String?
+  isFavorite Boolean  @default(false)
+  isDeleted  Boolean  @default(false)
+  deletedAt  DateTime?
+  deletedBy  String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parent   Folder?  @relation("FolderHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+  children Folder[] @relation("FolderHierarchy")
+  files    File[]
+
+  @@index([userId])
+  @@index([parentId])
+}
+
+model File {
+  id                 String      @id @default(cuid())
+  userId             String
+  folderId           String?
+  name               String
+  originalName       String
+  telegramFileId     String?     // Nullable for files split into chunks
+  telegramMessageId  Int?        // Nullable for files split into chunks
+  telegramChannelId  String?     // Telegram Channel ID
+  mimeType           String
+  size               Int         // Total size in bytes
+  checksum           String?     // MD5 or SHA256 checksum
+  isFavorite         Boolean     @default(false)
+  isDeleted          Boolean     @default(false)
+  deletedAt          DateTime?
+  deletedBy          String?
+  lastAccessedAt     DateTime    @default(now())
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @updatedAt
+
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  folder     Folder?     @relation(fields: [folderId], references: [id], onDelete: Cascade)
+  chunks     FileChunk[]
+  shareLinks ShareLink[]
+
+  @@index([userId])
+  @@index([folderId])
+}
+
+model FileChunk {
+  id                String   @id @default(cuid())
+  fileId            String
+  telegramFileId    String
+  telegramMessageId Int
+  chunkIndex        Int
+  chunkSize         Int
+  createdAt         DateTime @default(now())
+
+  file File @relation(fields: [fileId], references: [id], onDelete: Cascade)
+
+  @@index([fileId])
+}
+
+model ShareLink {
+  id            String    @id @default(cuid())
+  fileId        String
+  token         String    @unique
+  passwordHash  String?   // Nullable, for password protection
+  expiresAt     DateTime? // Nullable, null means never expires
+  downloadCount Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  file File @relation(fields: [fileId], references: [id], onDelete: Cascade)
+
+  @@index([fileId])
+}
+
+model ActivityLog {
+  id        String   @id @default(cuid())
+  userId    String
+  action    String
+  metadata  String?  // JSON serialized string
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model SubscriptionPlan {
+  id           String   @id @default(cuid())
+  name         String   @unique
+  storageLimit Float    // in bytes
+  price        Float
+  currency     String   @default("INR")
+  isDefault    Boolean  @default(false)
+  isActive     Boolean  @default(true)
+  features     String?  // JSON string
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  subscriptions       UserSubscription[]
+  payments            Payment[]
+  planFeatures        PlanFeature[]
+  subscriptionHistory SubscriptionHistory[]
+}
+
+model UserSubscription {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  planId      String
+  startDate   DateTime @default(now())
+  expiryDate  DateTime?
+  renewalDate DateTime?
+  autoRenew   Boolean  @default(false)
+  status      String   @default("ACTIVE") // ACTIVE, EXPIRED, CANCELLED
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan SubscriptionPlan @relation(fields: [planId], references: [id])
+}
+
+model Payment {
+  id              String   @id @default(cuid())
+  userId          String
+  planId          String
+  amount          Float
+  currency        String   @default("INR")
+  gateway         String?
+  transactionId   String?  @unique
+  status          String   @default("PENDING") // PENDING, SUCCESS, FAILED, REFUNDED, CANCELLED
+  invoiceNumber   String?  @unique
+  paymentMethod   String?
+  paymentDate     DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan SubscriptionPlan @relation(fields: [planId], references: [id])
+  invoice Invoice?
+  history PaymentHistory[]
+}
+
+model Invoice {
+  id        String   @id @default(cuid())
+  paymentId String   @unique
+  amount    Float
+  date      DateTime @default(now())
+
+  payment Payment @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+}
+
+model StorageQuota {
+  id               String   @id @default(cuid())
+  userId           String   @unique
+  allocatedStorage Float
+  usedStorage      Float    @default(0)
+  updatedAt        DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AdminNotification {
+  id        String   @id @default(cuid())
+  type      String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model PlanFeature {
+  id        String   @id @default(cuid())
+  planId    String
+  name      String
+
+  plan SubscriptionPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+}
+
+model SubscriptionHistory {
+  id        String   @id @default(cuid())
+  userId    String
+  planId    String
+  action    String
+  date      DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan SubscriptionPlan @relation(fields: [planId], references: [id])
+}
+
+model PaymentHistory {
+  id        String   @id @default(cuid())
+  paymentId String
+  status    String
+  date      DateTime @default(now())
+
+  payment Payment @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+}
+
+model StorageAnalytics {
+  id                  String   @id @default(cuid())
+  date                DateTime @unique
+  telegramUsed        Float
+  telegramRemaining   Float
+  chunkCount          Int
+  uploadedChunks      Int
+  averageFileSize     Float
+  averageChunkSize    Float
+  uploadSuccessRate   Float
+  downloadSuccessRate Float
+  deletedFiles        Int
+  failedUploads       Int
+  createdAt           DateTime @default(now())
+}

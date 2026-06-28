@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SkyBox - My Files</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#ffb596",
+                        "surface-container-high": "#e7e7f3",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "on-primary-container": "#eeefff",
+                        "background": "#faf8ff",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f0f0fb",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed": "#00174b",
+                        "primary-container": "#2563eb",
+                        "on-secondary-fixed-variant": "#004395",
+                        "on-surface": "#191b23",
+                        "on-background": "#191b23",
+                        "surface-container-low": "#f3f3fe",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#004ac6",
+                        "inverse-primary": "#b4c5ff",
+                        "primary-fixed": "#dbe1ff",
+                        "tertiary-fixed": "#ffdbcd",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "secondary-fixed": "#d8e2ff",
+                        "on-tertiary-fixed": "#360f00",
+                        "surface": "#faf8ff",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "outline": "#737686",
+                        "surface-dim": "#d9d9e5",
+                        "on-surface-variant": "#434655",
+                        "surface-variant": "#e1e2ed",
+                        "surface-bright": "#faf8ff",
+                        "on-secondary-container": "#fefcff",
+                        "inverse-surface": "#2e3039",
+                        "tertiary-container": "#bc4800",
+                        "tertiary": "#943700",
+                        "surface-container-highest": "#e1e2ed",
+                        "secondary": "#0058be",
+                        "on-tertiary-container": "#ffede6",
+                        "outline-variant": "#c3c6d7",
+                        "surface-tint": "#0053db",
+                        "on-secondary-fixed": "#001a42",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "secondary-container": "#2170e4",
+                        "surface-container": "#ededf9",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container_max": "1440px",
+                        "gutter": "24px",
+                        "margin_desktop": "32px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "md": "16px",
+                        "margin_mobile": "16px",
+                        "lg": "24px",
+                        "3xl": "64px",
+                        "2xl": "48px",
+                        "unit": "4px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "title-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "title-md": ["18px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .touch-target {
+            min-height: 48px;
+            min-width: 48px;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Glassmorphism utilities */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        
+        .glass-stroke {
+            border-top: 1px solid rgba(255,255,255,0.8);
+            border-left: 1px solid rgba(255,255,255,0.4);
+            border-right: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .file-item {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .file-item:active {
+            transform: scale(0.98);
+        }
+        
+        /* Swipe Actions Placeholder Styles */
+        .swipe-container {
+            overflow: hidden;
+            position: relative;
+        }
+        .swipe-content {
+            position: relative;
+            z-index: 2;
+            background: theme('colors.surface-container-lowest');
+            transition: transform 0.2s ease-out;
+        }
+        .swipe-actions {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 120px;
+            display: flex;
+            z-index: 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased min-h-screen flex flex-col overflow-x-hidden pb-[80px]"> <!-- Added pb for bottom nav -->
+<!-- Top Navigation Area (Mobile Optimized) -->
+<header class="sticky top-0 z-40 bg-surface/80 backdrop-blur-md border-b border-surface-variant">
+<div class="px-margin_mobile py-md flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container text-[20px]">cloud</span>
+</div>
+<span class="font-title-md text-title-md text-on-surface">SkyBox</span>
+</div>
+<div class="flex items-center gap-xs">
+<button class="touch-target rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant bg-surface-container flex-shrink-0 touch-target ml-xs">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a person, modern lighting, clear background, highly detailed, photorealistic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuChfIBvsGULl6Zu3YsJ2ITqO5oqwpCBYygogRDgsAVwChLuU9lg0Loc702NOmeGJINxkL_6mziKiTxigM7cGZtuJeN9IZfnaLK-sCVHhUbaaaodqs3syUkmtKjhlge8zHOAhlQOervlIQqjipIxPFHV03tw_Y2Jbu6C5xUL_yeGdYi4pg3LRb3jpmxGX7uWs70DCGiLVd0ec30CGcRRYvSv64hAti9l4WPRw_h1Iz0EvsrCIj8xgjuYCOXoWMWSg0CRsGdk955MCENT"/>
+</div>
+</div>
+</div>
+<!-- Breadcrumbs & View Toggle -->
+<div class="px-margin_mobile py-sm flex items-center justify-between bg-surface-container-lowest">
+<div class="flex items-center gap-xs overflow-x-auto hide-scrollbar whitespace-nowrap text-on-surface-variant font-body-md text-body-md flex-1 pr-md">
+<span class="flex items-center gap-xs cursor-pointer hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">home</span>
+                    Home
+                </span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="font-medium text-on-surface">Documents</span>
+</div>
+<div class="flex items-center bg-surface-container-high rounded-lg p-unit flex-shrink-0">
+<button class="w-8 h-8 rounded flex items-center justify-center bg-surface-container-lowest shadow-sm text-primary transition-all">
+<span class="material-symbols-outlined text-[18px] filled">grid_view</span>
+</button>
+<button class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-all">
+<span class="material-symbols-outlined text-[18px]">view_list</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 px-margin_mobile py-md">
+<!-- Folders Section -->
+<section class="mb-lg">
+<h2 class="font-title-md text-title-md text-on-surface mb-md">Folders</h2>
+<div class="grid grid-cols-2 gap-md">
+<!-- Folder Card 1 -->
+<div class="bg-surface-container-lowest border border-surface-variant rounded-xl p-md flex flex-col gap-sm file-item shadow-sm">
+<div class="flex items-start justify-between">
+<div class="w-10 h-10 rounded-lg bg-secondary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-[24px] filled">folder</span>
+</div>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors -mr-2 -mt-2">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface truncate">Q4 Reports</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">12 items • 45 MB</p>
+</div>
+</div>
+<!-- Folder Card 2 -->
+<div class="bg-surface-container-lowest border border-surface-variant rounded-xl p-md flex flex-col gap-sm file-item shadow-sm">
+<div class="flex items-start justify-between">
+<div class="w-10 h-10 rounded-lg bg-tertiary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary text-[24px] filled">folder_shared</span>
+</div>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors -mr-2 -mt-2">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface truncate">Design Assets</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">48 items • 1.2 GB</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Files Section -->
+<section>
+<div class="flex items-center justify-between mb-md">
+<h2 class="font-title-md text-title-md text-on-surface">Recent Files</h2>
+<button class="font-label-md text-label-md text-primary font-medium hover:underline">View All</button>
+</div>
+<div class="flex flex-col gap-sm">
+<!-- File Item 1 (Swipeable) -->
+<div class="swipe-container rounded-xl">
+<div class="swipe-actions">
+<div class="flex-1 bg-surface-tint text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined">star</span>
+</div>
+<div class="flex-1 bg-error text-on-error flex items-center justify-center">
+<span class="material-symbols-outlined">delete</span>
+</div>
+</div>
+<!-- Swipeable Content -->
+<div class="swipe-content flex items-center gap-md p-md border border-surface-variant rounded-xl shadow-sm file-item" id="swipe-item-1">
+<div class="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-blue-600">description</span>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-body-md text-body-md text-on-surface font-medium truncate">Project_Brief_v2.docx</h3>
+<div class="flex items-center gap-xs font-label-sm text-label-sm text-on-surface-variant mt-xs">
+<span>2.4 MB</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>Today, 10:42 AM</span>
+</div>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- File Item 2 (Image) -->
+<div class="swipe-container rounded-xl">
+<div class="swipe-actions">
+<div class="flex-1 bg-surface-tint text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined">star</span>
+</div>
+<div class="flex-1 bg-error text-on-error flex items-center justify-center">
+<span class="material-symbols-outlined">delete</span>
+</div>
+</div>
+<div class="swipe-content flex items-center gap-md p-md border border-surface-variant rounded-xl shadow-sm file-item" id="swipe-item-2">
+<div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A minimalist abstract geometric rendering with soft blue and white tones, high quality, digital art." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDesJbqgIpX1NhgfDc-f0nvfeJRBm6l5Rkspu4piOjqojrwwSVOpa919rkjDJTLBdTrG8aYHKl4mXNt_CQPnSgdVmXCZuUgnZsPWMZNVNVyEa05WA3WHC2PUFfkl9ZXrz_UeL99VRBKRVwp4A40GE9LjV92oFwOusmk8NqPSxVSJc0QzSZ3PqV0Jd-Yr0Z-XpIx909zMuDQWSLwsc1xPnpXg23a-WvT-oqxh86US6PDHIicgw22vyBEgGfHjWP-N8DklavC4WcxFIwS"/>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-body-md text-body-md text-on-surface font-medium truncate">Hero_Background.png</h3>
+<div class="flex items-center gap-xs font-label-sm text-label-sm text-on-surface-variant mt-xs">
+<span>8.1 MB</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>Yesterday</span>
+</div>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- File Item 3 -->
+<div class="swipe-container rounded-xl">
+<div class="swipe-actions">
+<div class="flex-1 bg-surface-tint text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined">star</span>
+</div>
+<div class="flex-1 bg-error text-on-error flex items-center justify-center">
+<span class="material-symbols-outlined">delete</span>
+</div>
+</div>
+<div class="swipe-content flex items-center gap-md p-md border border-surface-variant rounded-xl shadow-sm file-item" id="swipe-item-3">
+<div class="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-green-600">table_chart</span>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-body-md text-body-md text-on-surface font-medium truncate">Budget_2024.xlsx</h3>
+<div class="flex items-center gap-xs font-label-sm text-label-sm text-on-surface-variant mt-xs">
+<span>1.1 MB</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>Oct 12</span>
+</div>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom padding for FAB -->
+<div class="h-24"></div>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-[96px] right-margin_mobile w-14 h-14 bg-primary-container text-on-primary-container rounded-2xl shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-transform z-40 touch-target glass-stroke" style="box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4), 0 8px 10px -6px rgba(37, 99, 235, 0.2);">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<!-- Mobile Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full bg-surface-container-lowest/90 backdrop-blur-xl border-t border-surface-variant z-50 px-md py-sm flex justify-between items-center shadow-[0_-4px_20px_rgba(0,0,0,0.05)] pb-safe">
+<button class="flex flex-col items-center justify-center w-16 h-12 gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[24px]">dashboard</span>
+<span class="font-label-sm text-label-sm text-[10px]">Home</span>
+</button>
+<!-- Active Tab: My Files -->
+<button class="flex flex-col items-center justify-center w-16 h-12 gap-1 text-primary">
+<div class="px-4 py-1 rounded-full bg-primary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px] filled">folder_open</span>
+</div>
+<span class="font-label-sm text-label-sm text-[10px] font-bold">Files</span>
+</button>
+<button class="flex flex-col items-center justify-center w-16 h-12 gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[24px]">star</span>
+<span class="font-label-sm text-label-sm text-[10px]">Favorites</span>
+</button>
+<button class="flex flex-col items-center justify-center w-16 h-12 gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+<span class="font-label-sm text-label-sm text-[10px]">Settings</span>
+</button>
+</nav>
+<!-- Simple script to demonstrate swipe interaction (visual only for mockup) -->
+<script>
+        // Extremely basic swipe simulation for visual purposes in a mockup
+        document.querySelectorAll('.swipe-content').forEach(item => {
+            let startX;
+            item.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+            });
+            item.addEventListener('touchmove', (e) => {
+                if(!startX) return;
+                let diff = startX - e.touches[0].clientX;
+                if (diff > 20 && diff < 120) {
+                     item.style.transform = `translateX(-${diff}px)`;
+                }
+            });
+            item.addEventListener('touchend', (e) => {
+                let diff = startX - e.changedTouches[0].clientX;
+                if (diff > 60) {
+                     item.style.transform = `translateX(-120px)`; // Snap open
+                } else {
+                     item.style.transform = `translateX(0)`; // Snap closed
+                }
+                startX = null;
+            });
+        });
+    </script>
+</body></html>

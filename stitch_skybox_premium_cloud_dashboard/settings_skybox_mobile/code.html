@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SkyBox - Settings &amp; Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#ffb596",
+                      "surface-container-high": "#e7e7f3",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary-fixed-variant": "#7d2d00",
+                      "on-primary-container": "#eeefff",
+                      "background": "#faf8ff",
+                      "on-error": "#ffffff",
+                      "inverse-on-surface": "#f0f0fb",
+                      "error": "#ba1a1a",
+                      "on-primary-fixed": "#00174b",
+                      "primary-container": "#2563eb",
+                      "on-secondary-fixed-variant": "#004395",
+                      "on-surface": "#191b23",
+                      "on-background": "#191b23",
+                      "surface-container-low": "#f3f3fe",
+                      "on-tertiary": "#ffffff",
+                      "primary": "#004ac6",
+                      "inverse-primary": "#b4c5ff",
+                      "primary-fixed": "#dbe1ff",
+                      "tertiary-fixed": "#ffdbcd",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "secondary-fixed": "#d8e2ff",
+                      "on-tertiary-fixed": "#360f00",
+                      "surface": "#faf8ff",
+                      "on-secondary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "outline": "#737686",
+                      "surface-dim": "#d9d9e5",
+                      "on-surface-variant": "#434655",
+                      "surface-variant": "#e1e2ed",
+                      "surface-bright": "#faf8ff",
+                      "on-secondary-container": "#fefcff",
+                      "inverse-surface": "#2e3039",
+                      "tertiary-container": "#bc4800",
+                      "tertiary": "#943700",
+                      "surface-container-highest": "#e1e2ed",
+                      "secondary": "#0058be",
+                      "on-tertiary-container": "#ffede6",
+                      "outline-variant": "#c3c6d7",
+                      "surface-tint": "#0053db",
+                      "on-secondary-fixed": "#001a42",
+                      "secondary-fixed-dim": "#adc6ff",
+                      "secondary-container": "#2170e4",
+                      "surface-container": "#ededf9",
+                      "error-container": "#ffdad6",
+                      "on-error-container": "#93000a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container_max": "1440px",
+                      "gutter": "24px",
+                      "margin_desktop": "32px",
+                      "xs": "4px",
+                      "xl": "32px",
+                      "md": "16px",
+                      "margin_mobile": "16px",
+                      "lg": "24px",
+                      "3xl": "64px",
+                      "2xl": "48px",
+                      "unit": "4px",
+                      "sm": "8px"
+              },
+              "fontFamily": {
+                      "label-sm": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "title-md": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "title-md": ["18px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col font-body-md text-body-md selection:bg-primary-container selection:text-on-primary-container pb-24 md:pb-0">
+<!-- Top Navigation App Bar -->
+<header class="bg-surface/70 backdrop-blur-xl docked full-width top-0 sticky shadow-sm flex justify-between items-center w-full px-lg py-sm max-w-container_max mx-auto z-50 md:hidden">
+<div class="font-headline-lg-mobile text-headline-lg-mobile tracking-tighter text-primary">SkyBox</div>
+<div class="flex gap-sm">
+<button class="p-xs hover:bg-surface-container-high/50 rounded-full transition-all duration-300">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+</div>
+</header>
+<main class="flex-1 w-full max-w-2xl mx-auto md:max-w-container_max md:px-margin_desktop">
+<!-- Profile Header Section -->
+<section class="px-lg py-lg flex items-center gap-md">
+<div class="relative">
+<img class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover shadow-sm ring-2 ring-surface-container-lowest" data-alt="A highly detailed, professional headshot portrait of an individual in a bright, modern studio setting. The lighting is soft and high-key, creating a clean, airy, light-mode aesthetic with subtle depth. The background is a seamless, slightly blurred pale grey surface, perfectly matching the Aero-Minimalism design language." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2uvkz_BYisspIUit5WWY7QaxdrksDkfnhJFdak5o2aCU5Eux-e0Vk4wIuv9nbpyEz17ivXeLM6kZKP0OjGjRxosRMesqMdKuiD2MRh5SK0uP4I7VvuY92_6nYzkU6QMnq_PSfJe0qDUzT1F_lU5FrplXFwBz1-dzHzz1v-3dI5QrGoM3g9ieHtUYOcIDxKj-81jLLRtZHw8icYHAlnxmb4Pej0Pvfuyg1wRSi03Bf6Su-1mt0QeF0Ek31-0qXMM-aNbYGc63h7Fhb"/>
+</div>
+<div class="flex-1 flex flex-col justify-center">
+<h1 class="font-title-md text-title-md text-on-surface">Alex Carter</h1>
+<p class="font-label-md text-label-md text-on-surface-variant">alex.carter@skybox.app</p>
+</div>
+<button class="bg-primary-container hover:bg-primary transition-colors text-on-primary-container hover:text-white px-md py-xs md:py-sm rounded-full font-label-sm text-label-sm shadow-sm">
+                Upgrade
+            </button>
+</section>
+<!-- Storage Plan Card -->
+<section class="px-lg pb-lg">
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-sm border border-outline-variant/20 hover:-translate-y-1 transition-transform duration-300">
+<div class="flex justify-between items-end mb-sm">
+<div>
+<h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-xs">Current Plan</h2>
+<span class="font-title-md text-title-md text-on-surface">Basic Storage</span>
+</div>
+<span class="font-label-md text-label-md text-primary font-semibold">45GB <span class="text-on-surface-variant font-normal">/ 50GB</span></span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden mt-sm">
+<div class="h-full bg-gradient-to-r from-primary-container to-primary rounded-full transition-all duration-1000 ease-out w-[90%]"></div>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-sm">You have used 90% of your available storage.</p>
+</div>
+</section>
+<!-- Settings Groups -->
+<section class="px-lg flex flex-col gap-md pb-lg">
+<!-- Group: App Settings -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/20 overflow-hidden">
+<!-- Theme Toggle -->
+<button class="w-full flex items-center justify-between p-md border-b border-outline-variant/10 hover:bg-surface-container-low transition-colors active:bg-surface-container-high">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 0;">palette</span>
+<span class="font-body-md text-body-md text-on-surface">Theme</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="font-label-md text-label-md text-on-surface-variant">System</span>
+<span class="material-symbols-outlined text-outline-variant">chevron_right</span>
+</div>
+</button>
+<!-- Notifications Toggle -->
+<div class="w-full flex items-center justify-between p-md hover:bg-surface-container-low transition-colors cursor-pointer" onclick="this.querySelector('.toggle-knob').classList.toggle('translate-x-4'); this.querySelector('.toggle-bg').classList.toggle('bg-primary'); this.querySelector('.toggle-bg').classList.toggle('bg-surface-variant');">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 0;">notifications</span>
+<span class="font-body-md text-body-md text-on-surface">Notifications</span>
+</div>
+<div class="toggle-bg w-10 h-6 bg-primary rounded-full relative transition-colors duration-300">
+<div class="toggle-knob w-4 h-4 bg-surface-container-lowest shadow-sm rounded-full absolute left-1 top-1 translate-x-4 transition-transform duration-300"></div>
+</div>
+</div>
+</div>
+<!-- Group: Security -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/20 overflow-hidden">
+<!-- Biometric Lock -->
+<div class="w-full flex items-center justify-between p-md hover:bg-surface-container-low transition-colors cursor-pointer" onclick="this.querySelector('.toggle-knob').classList.toggle('translate-x-4'); this.querySelector('.toggle-bg').classList.toggle('bg-primary'); this.querySelector('.toggle-bg').classList.toggle('bg-surface-variant');">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 0;">fingerprint</span>
+<span class="font-body-md text-body-md text-on-surface">Biometric Lock</span>
+</div>
+<div class="toggle-bg w-10 h-6 bg-surface-variant rounded-full relative transition-colors duration-300">
+<div class="toggle-knob w-4 h-4 bg-surface-container-lowest shadow-sm rounded-full absolute left-1 top-1 transition-transform duration-300"></div>
+</div>
+</div>
+</div>
+<!-- Group: Data Management -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/20 overflow-hidden">
+<!-- Offline Files -->
+<button class="w-full flex items-center justify-between p-md hover:bg-surface-container-low transition-colors active:bg-surface-container-high">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 0;">offline_pin</span>
+<span class="font-body-md text-body-md text-on-surface">Offline Files</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant">chevron_right</span>
+</button>
+</div>
+</section>
+<!-- Sign Out Action -->
+<section class="px-lg pb-xl pt-sm">
+<button class="w-full py-md border border-error text-error rounded-xl font-label-md text-label-md flex justify-center items-center gap-sm hover:bg-error-container/10 active:bg-error-container/20 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 0;">logout</span>
+                Sign Out
+            </button>
+</section>
+</main>
+<!-- Mobile Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full bg-surface/85 backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,0,0,0.03)] z-50 md:hidden pb-safe">
+<div class="flex justify-around items-center px-sm py-xs h-16">
+<!-- Inactive -->
+<a class="flex flex-col items-center justify-center w-16 h-full text-on-surface-variant hover:bg-surface-container-high/50 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<!-- Inactive -->
+<a class="flex flex-col items-center justify-center w-16 h-full text-on-surface-variant hover:bg-surface-container-high/50 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">folder_open</span>
+<span class="font-label-sm text-label-sm mt-1">Files</span>
+</a>
+<!-- Inactive -->
+<a class="flex flex-col items-center justify-center w-16 h-full text-on-surface-variant hover:bg-surface-container-high/50 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">cloud</span>
+<span class="font-label-sm text-label-sm mt-1">Storage</span>
+</a>
+<!-- Active -->
+<a class="flex flex-col items-center justify-center w-16 h-full text-primary font-bold bg-primary-container/20 rounded-xl transition-all scale-95 shadow-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</a>
+</div>
+</nav>
+</body></html>

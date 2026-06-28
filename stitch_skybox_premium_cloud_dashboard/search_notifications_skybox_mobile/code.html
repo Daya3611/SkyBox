@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SkyBox - Search &amp; Notifications</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e1e2ed;
+            border-radius: 9999px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#ffb596",
+                        "surface-container-high": "#e7e7f3",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "on-primary-container": "#eeefff",
+                        "background": "#faf8ff",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f0f0fb",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed": "#00174b",
+                        "primary-container": "#2563eb",
+                        "on-secondary-fixed-variant": "#004395",
+                        "on-surface": "#191b23",
+                        "on-background": "#191b23",
+                        "surface-container-low": "#f3f3fe",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#004ac6",
+                        "inverse-primary": "#b4c5ff",
+                        "primary-fixed": "#dbe1ff",
+                        "tertiary-fixed": "#ffdbcd",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "secondary-fixed": "#d8e2ff",
+                        "on-tertiary-fixed": "#360f00",
+                        "surface": "#faf8ff",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "outline": "#737686",
+                        "surface-dim": "#d9d9e5",
+                        "on-surface-variant": "#434655",
+                        "surface-variant": "#e1e2ed",
+                        "surface-bright": "#faf8ff",
+                        "on-secondary-container": "#fefcff",
+                        "inverse-surface": "#2e3039",
+                        "tertiary-container": "#bc4800",
+                        "tertiary": "#943700",
+                        "surface-container-highest": "#e1e2ed",
+                        "secondary": "#0058be",
+                        "on-tertiary-container": "#ffede6",
+                        "outline-variant": "#c3c6d7",
+                        "surface-tint": "#0053db",
+                        "on-secondary-fixed": "#001a42",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "secondary-container": "#2170e4",
+                        "surface-container": "#ededf9",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container_max": "1440px",
+                        "gutter": "24px",
+                        "margin_desktop": "32px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "md": "16px",
+                        "margin_mobile": "16px",
+                        "lg": "24px",
+                        "3xl": "64px",
+                        "2xl": "48px",
+                        "unit": "4px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "title-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "title-md": ["18px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-md antialiased h-screen w-screen overflow-hidden selection:bg-primary-fixed selection:text-on-primary-fixed">
+<div class="fixed inset-0 z-50 flex flex-col bg-surface/95 backdrop-blur-3xl h-full w-full">
+<header class="pt-xl pb-md px-lg flex items-center gap-md border-b border-outline-variant/20 sticky top-0 bg-surface/80 backdrop-blur-xl z-10 shrink-0">
+<button aria-label="Close search" class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface hover:bg-surface-container-high transition-colors focus:outline-none focus:ring-2 focus:ring-primary">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<div class="relative flex-1 group">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px] pointer-events-none transition-colors group-focus-within:text-primary">search</span>
+<input autofocus="" class="w-full bg-surface-container-low border border-transparent rounded-full pl-[48px] pr-xl py-sm font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant focus:bg-surface-container-lowest focus:border-primary focus:ring-2 focus:ring-primary/20 focus:ring-offset-0 transition-all outline-none shadow-sm" placeholder="Search SkyBox..." type="text"/>
+<button aria-label="Clear search" class="absolute right-md top-1/2 -translate-y-1/2 text-outline-variant hover:text-on-surface transition-colors hidden group-focus-within:block">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</header>
+<main class="flex-1 overflow-y-auto px-lg py-lg flex flex-col gap-xl">
+<section class="flex flex-col gap-sm animate-fade-in-up">
+<h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-[0.05em] pl-xs">Suggested Filters</h2>
+<div class="flex flex-wrap gap-sm">
+<button class="flex items-center gap-xs px-md py-sm rounded-full border border-outline-variant/50 bg-surface-container-lowest text-on-surface font-label-md text-label-md hover:border-outline hover:bg-surface-container-low transition-all active:scale-95">
+<span class="material-symbols-outlined text-[18px] text-primary">picture_as_pdf</span> PDFs
+                    </button>
+<button class="flex items-center gap-xs px-md py-sm rounded-full border border-outline-variant/50 bg-surface-container-lowest text-on-surface font-label-md text-label-md hover:border-outline hover:bg-surface-container-low transition-all active:scale-95">
+<span class="material-symbols-outlined text-[18px] text-tertiary">image</span> Images
+                    </button>
+<button class="flex items-center gap-xs px-md py-sm rounded-full border border-outline-variant/50 bg-surface-container-lowest text-on-surface font-label-md text-label-md hover:border-outline hover:bg-surface-container-low transition-all active:scale-95">
+<span class="material-symbols-outlined text-[18px] text-secondary">group</span> Shared
+                    </button>
+</div>
+</section>
+<section class="flex flex-col gap-xs animate-fade-in-up delay-75">
+<div class="flex items-center justify-between pb-xs px-xs">
+<h2 class="font-title-md text-title-md text-on-surface">Recent Searches</h2>
+</div>
+<div class="flex flex-col bg-surface-container-lowest rounded-2xl border border-outline-variant/20 overflow-hidden shadow-sm">
+<button class="w-full flex items-center gap-md px-md py-md hover:bg-surface-container-low transition-colors text-left group border-b border-outline-variant/10">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center shrink-0 group-hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-on-primary-fixed">history</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface flex-1 truncate">Q3 Financial Reports 2024</span>
+<span class="material-symbols-outlined text-[18px] text-outline-variant opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">north_west</span>
+</button>
+<button class="w-full flex items-center gap-md px-md py-md hover:bg-surface-container-low transition-colors text-left group border-b border-outline-variant/10">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center shrink-0 group-hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-on-primary-fixed">history</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface flex-1 truncate">Project Apollo Design Assets</span>
+<span class="material-symbols-outlined text-[18px] text-outline-variant opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">north_west</span>
+</button>
+<button class="w-full flex items-center gap-md px-md py-md hover:bg-surface-container-low transition-colors text-left group">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center shrink-0 group-hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-on-primary-fixed">history</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface flex-1 truncate">Client Onboarding Template</span>
+<span class="material-symbols-outlined text-[18px] text-outline-variant opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">north_west</span>
+</button>
+</div>
+</section>
+<section class="flex flex-col gap-sm pb-2xl animate-fade-in-up delay-150">
+<div class="flex items-center justify-between pb-xs px-xs">
+<h2 class="font-title-md text-title-md text-on-surface">Activity</h2>
+<button class="font-label-sm text-label-sm text-primary uppercase tracking-wider hover:text-primary-container transition-colors">Mark All Read</button>
+</div>
+<div class="flex flex-col gap-sm">
+<div class="flex gap-md p-md rounded-2xl bg-surface-container-low border border-outline-variant/20 hover:bg-surface-container hover:shadow-md transition-all cursor-pointer relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="w-12 h-12 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center shrink-0 ml-sm shadow-inner group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">folder_shared</span>
+</div>
+<div class="flex flex-col gap-xs justify-center flex-1 py-xs">
+<p class="font-body-md text-body-md text-on-surface leading-tight"><span class="font-semibold text-primary">Alex Chen</span> shared a folder with you.</p>
+<p class="font-label-md text-label-md text-on-surface-variant truncate">"Design_System_Assets"</p>
+<p class="font-label-sm text-label-sm text-outline">Just now</p>
+</div>
+</div>
+<div class="flex gap-md p-md rounded-2xl bg-surface-container-lowest border border-outline-variant/10 hover:bg-surface-container-low hover:shadow-sm transition-all cursor-pointer group">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center shrink-0 ml-sm shadow-inner group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">cloud_done</span>
+</div>
+<div class="flex flex-col gap-xs justify-center flex-1 py-xs">
+<p class="font-body-md text-body-md text-on-surface font-semibold leading-tight">Upload complete</p>
+<p class="font-label-md text-label-md text-on-surface-variant truncate">12 high-res images uploaded to "Marketing 2024"</p>
+<p class="font-label-sm text-label-sm text-outline">15m ago</p>
+</div>
+</div>
+<div class="flex gap-md p-md rounded-2xl bg-surface-container-lowest border border-outline-variant/10 hover:bg-surface-container-low hover:shadow-sm transition-all cursor-pointer group opacity-70 hover:opacity-100">
+<div class="w-12 h-12 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center shrink-0 ml-sm overflow-hidden shadow-inner group-hover:scale-105 transition-transform">
+<img class="w-full h-full object-cover" data-alt="A small, circular avatar portrait of a professional woman with glasses, smiling softly, lit by bright, clean, high-key studio lighting against a minimal white background, matching a modern UI interface profile picture style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBw_gCuGYWL6nLyvuRVXRj7tG8mQcsDhYYwytgDr9PG3nQVJDBZG8BTLilGdIlSkfFXLeTxzMwRZdPDI0FuSKPB-dzCcGON5SF4Uw__rfluAkbA24A9SF_HIuqbmb7C4bcw6puF6q9Bykd7tJuqErF--OUhYsm5gi0LnCoeEF96dXKZptod1T7vJ5WppNl6HiI8vEshonlSZ5gkm6HFkbak5EiN9FCWPb8Aw7i1xu906wfhg1OHycB_b-Jhx1SieRcsvXs13eHiaWt-"/>
+</div>
+<div class="flex flex-col gap-xs justify-center flex-1 py-xs">
+<p class="font-body-md text-body-md text-on-surface leading-tight"><span class="font-semibold">Sarah Jenkins</span> commented on your document.</p>
+<p class="font-label-md text-label-md text-on-surface-variant line-clamp-2">"Great points on slide 4, let's review the spacing tomorrow."</p>
+<p class="font-label-sm text-label-sm text-outline">2h ago</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 0.4s ease-out forwards;
+            opacity: 0;
+        }
+        .delay-75 { animation-delay: 75ms; }
+        .delay-150 { animation-delay: 150ms; }
+    </style>
+<script>
+        document.querySelector('button[aria-label="Close search"]').addEventListener('click', () => {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                console.log('Close overlay action');
+            }, 200);
+        });
+    </script>
+</body></html>

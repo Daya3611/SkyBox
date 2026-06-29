@@ -66,28 +66,28 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-radial from-slate-900 via-zinc-950 to-black p-4 text-slate-100">
+    <div className="min-h-screen flex items-center justify-center bg-background p-4 text-on-surface">
       {/* Background decoration elements */}
-      <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-violet-600/10 rounded-full blur-3xl -z-10 animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl -z-10 animate-pulse delay-700" />
+      <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-primary/10 rounded-full blur-3xl -z-10 animate-pulse" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary/10 rounded-full blur-3xl -z-10 animate-pulse delay-700" />
 
-      <div className="w-full max-w-md bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-2xl shadow-2xl space-y-6">
+      <div className="w-full max-w-md bg-surface-container-lowest border border-outline-variant/30 p-8 rounded-2xl shadow-sm space-y-6 mt-8 mb-8">
         {/* Header / Logo */}
         <div className="text-center space-y-2">
-          <div className="inline-flex p-3 bg-violet-500/10 rounded-2xl border border-violet-500/20 text-violet-400 mb-2">
+          <div className="inline-flex p-3 bg-primary-container rounded-2xl border border-primary/20 text-on-primary-container mb-2">
             <UserPlus className="w-8 h-8" />
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-indigo-400 to-cyan-400">
+          <h1 className="text-3xl font-extrabold tracking-tight text-on-surface">
             Create Account
           </h1>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-on-surface-variant">
             Get started with your Telegram-backed storage.
           </p>
         </div>
 
         {/* Error Callout */}
         {error && (
-          <div className="flex items-center gap-3 bg-rose-500/10 border border-rose-500/20 text-rose-400 text-sm p-3.5 rounded-xl">
+          <div className="flex items-center gap-3 bg-error-container border border-error/20 text-on-error-container text-sm p-3.5 rounded-xl">
             <AlertTriangle className="w-5 h-5 shrink-0" />
             <p>{error}</p>
           </div>
@@ -95,7 +95,7 @@ export default function RegisterPage() {
 
         {/* Success Callout */}
         {success && (
-          <div className="flex items-center gap-3 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm p-3.5 rounded-xl">
+          <div className="flex items-center gap-3 bg-primary-container border border-primary/20 text-on-primary-container text-sm p-3.5 rounded-xl">
             <CheckCircle className="w-5 h-5 shrink-0" />
             <div className="space-y-1">
               <p className="font-semibold">{success}</p>
@@ -107,78 +107,78 @@ export default function RegisterPage() {
         {/* Registration Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-1">
-            <label className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+            <label className="text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
               Full Name
             </label>
             <div className="relative">
-              <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+              <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-outline" />
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 disabled={isPending}
                 placeholder="John Doe"
-                className="w-full pl-11 pr-4 py-3 bg-black/40 border border-white/10 rounded-xl focus:border-violet-500 focus:ring-1 focus:ring-violet-500 outline-none text-sm text-slate-200 placeholder-slate-500 transition"
+                className="w-full pl-11 pr-4 py-3 bg-surface-container-highest border border-outline-variant/50 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm text-on-surface placeholder-on-surface-variant transition"
               />
             </div>
             {fieldErrors.name && (
-              <p className="text-rose-400 text-xs mt-1">{fieldErrors.name[0]}</p>
+              <p className="text-error text-xs mt-1">{fieldErrors.name[0]}</p>
             )}
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+            <label className="text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
               Email Address
             </label>
             <div className="relative">
-              <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+              <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-outline" />
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isPending}
                 placeholder="you@example.com"
-                className="w-full pl-11 pr-4 py-3 bg-black/40 border border-white/10 rounded-xl focus:border-violet-500 focus:ring-1 focus:ring-violet-500 outline-none text-sm text-slate-200 placeholder-slate-500 transition"
+                className="w-full pl-11 pr-4 py-3 bg-surface-container-highest border border-outline-variant/50 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm text-on-surface placeholder-on-surface-variant transition"
               />
             </div>
             {fieldErrors.email && (
-              <p className="text-rose-400 text-xs mt-1">{fieldErrors.email[0]}</p>
+              <p className="text-error text-xs mt-1">{fieldErrors.email[0]}</p>
             )}
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+            <label className="text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
               Password
             </label>
             <div className="relative">
-              <KeyRound className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+              <KeyRound className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-outline" />
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 disabled={isPending}
                 placeholder="At least 6 characters"
-                className="w-full pl-11 pr-4 py-3 bg-black/40 border border-white/10 rounded-xl focus:border-violet-500 focus:ring-1 focus:ring-violet-500 outline-none text-sm text-slate-200 placeholder-slate-500 transition"
+                className="w-full pl-11 pr-4 py-3 bg-surface-container-highest border border-outline-variant/50 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm text-on-surface placeholder-on-surface-variant transition"
               />
             </div>
             {fieldErrors.password && (
-              <p className="text-rose-400 text-xs mt-1">{fieldErrors.password[0]}</p>
+              <p className="text-error text-xs mt-1">{fieldErrors.password[0]}</p>
             )}
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+            <label className="text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
               Confirm Password
             </label>
             <div className="relative">
-              <KeyRound className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+              <KeyRound className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-outline" />
               <input
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 disabled={isPending}
                 placeholder="Repeat password"
-                className="w-full pl-11 pr-4 py-3 bg-black/40 border border-white/10 rounded-xl focus:border-violet-500 focus:ring-1 focus:ring-violet-500 outline-none text-sm text-slate-200 placeholder-slate-500 transition"
+                className="w-full pl-11 pr-4 py-3 bg-surface-container-highest border border-outline-variant/50 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm text-on-surface placeholder-on-surface-variant transition"
               />
             </div>
           </div>
@@ -186,18 +186,18 @@ export default function RegisterPage() {
           <button
             type="submit"
             disabled={isPending}
-            className="w-full py-3 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 disabled:opacity-50 text-white font-semibold rounded-xl text-sm transition shadow-lg shadow-violet-500/20 active:scale-[0.98] mt-2"
+            className="w-full py-3 bg-primary hover:bg-primary/90 disabled:opacity-50 text-on-primary font-semibold rounded-xl text-sm transition shadow-sm active:scale-[0.98] mt-2"
           >
             {isPending ? 'Registering...' : 'Register'}
           </button>
         </form>
 
         {/* Links */}
-        <p className="text-center text-sm text-slate-400">
+        <p className="text-center text-sm text-on-surface-variant">
           Already have an account?{' '}
           <Link
             href="/login"
-            className="text-violet-400 font-semibold hover:underline"
+            className="text-primary font-semibold hover:underline"
           >
             Sign in
           </Link>

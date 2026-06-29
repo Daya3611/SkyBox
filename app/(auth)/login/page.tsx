@@ -55,28 +55,28 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-radial from-slate-900 via-zinc-950 to-black p-4 text-slate-100">
+    <div className="min-h-screen flex items-center justify-center bg-background p-4 text-on-surface">
       {/* Background decoration elements */}
-      <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-violet-600/10 rounded-full blur-3xl -z-10 animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl -z-10 animate-pulse delay-700" />
+      <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-primary/10 rounded-full blur-3xl -z-10 animate-pulse" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary/10 rounded-full blur-3xl -z-10 animate-pulse delay-700" />
 
-      <div className="w-full max-w-md bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-2xl shadow-2xl space-y-6">
+      <div className="w-full max-w-md bg-surface-container-lowest border border-outline-variant/30 p-8 rounded-2xl shadow-sm space-y-6">
         {/* Header / Logo */}
         <div className="text-center space-y-2">
-          <div className="inline-flex p-3 bg-violet-500/10 rounded-2xl border border-violet-500/20 text-violet-400 mb-2">
+          <div className="inline-flex p-3 bg-primary-container rounded-2xl border border-primary/20 text-on-primary-container mb-2">
             <LogIn className="w-8 h-8" />
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-indigo-400 to-cyan-400">
+          <h1 className="text-3xl font-extrabold tracking-tight text-on-surface">
             SkyBox
           </h1>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-on-surface-variant">
             Secure cloud storage, powered by Telegram.
           </p>
         </div>
 
         {/* Error Callout */}
         {error && (
-          <div className="flex items-center gap-3 bg-rose-500/10 border border-rose-500/20 text-rose-400 text-sm p-3.5 rounded-xl">
+          <div className="flex items-center gap-3 bg-error-container border border-error/20 text-on-error-container text-sm p-3.5 rounded-xl">
             <AlertTriangle className="w-5 h-5 shrink-0" />
             <p>{error}</p>
           </div>
@@ -85,40 +85,40 @@ export default function LoginPage() {
         {/* Credentials Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-1">
-            <label className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+            <label className="text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
               Email Address
             </label>
             <div className="relative">
-              <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+              <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-outline" />
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isPending}
                 placeholder="you@example.com"
-                className="w-full pl-11 pr-4 py-3 bg-black/40 border border-white/10 rounded-xl focus:border-violet-500 focus:ring-1 focus:ring-violet-500 outline-none text-sm text-slate-200 placeholder-slate-500 transition"
+                className="w-full pl-11 pr-4 py-3 bg-surface-container-highest border border-outline-variant/50 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm text-on-surface placeholder-on-surface-variant transition"
               />
             </div>
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+            <label className="text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
               Password
             </label>
             <div className="relative">
-              <KeyRound className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+              <KeyRound className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-outline" />
               <input
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 disabled={isPending}
                 placeholder="••••••••"
-                className="w-full pl-11 pr-11 py-3 bg-black/40 border border-white/10 rounded-xl focus:border-violet-500 focus:ring-1 focus:ring-violet-500 outline-none text-sm text-slate-200 placeholder-slate-500 transition"
+                className="w-full pl-11 pr-11 py-3 bg-surface-container-highest border border-outline-variant/50 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm text-on-surface placeholder-on-surface-variant transition"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 text-slate-500 hover:text-slate-300 transition"
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 text-outline hover:text-on-surface transition"
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
@@ -128,23 +128,23 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={isPending}
-            className="w-full py-3 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 disabled:opacity-50 text-white font-semibold rounded-xl text-sm transition shadow-lg shadow-violet-500/20 active:scale-[0.98]"
+            className="w-full py-3 bg-primary hover:bg-primary/90 disabled:opacity-50 text-on-primary font-semibold rounded-xl text-sm transition shadow-sm active:scale-[0.98]"
           >
             {isPending ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
 
-        <div className="relative flex py-2 items-center text-xs text-slate-500 uppercase tracking-widest">
-          <div className="flex-grow border-t border-white/10" />
+        <div className="relative flex py-2 items-center text-xs text-on-surface-variant uppercase tracking-widest">
+          <div className="flex-grow border-t border-outline-variant/30" />
           <span className="mx-4">Or continue with</span>
-          <div className="flex-grow border-t border-white/10" />
+          <div className="flex-grow border-t border-outline-variant/30" />
         </div>
 
         {/* Social Sign-in */}
         <button
           onClick={handleGoogleLogin}
           type="button"
-          className="w-full flex items-center justify-center gap-3 py-3 bg-white/5 border border-white/10 hover:bg-white/10 text-slate-200 font-semibold rounded-xl text-sm transition active:scale-[0.98]"
+          className="w-full flex items-center justify-center gap-3 py-3 bg-surface-container-lowest border border-outline-variant hover:bg-surface-container-low text-on-surface font-semibold rounded-xl text-sm transition active:scale-[0.98]"
         >
           {/* Google Logo SVG */}
           <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -169,11 +169,11 @@ export default function LoginPage() {
         </button>
 
         {/* Links */}
-        <p className="text-center text-sm text-slate-400">
+        <p className="text-center text-sm text-on-surface-variant">
           Don't have an account?{' '}
           <Link
             href="/register"
-            className="text-violet-400 font-semibold hover:underline"
+            className="text-primary font-semibold hover:underline"
           >
             Sign up now
           </Link>

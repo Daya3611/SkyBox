@@ -47,7 +47,7 @@ export async function GET() {
       // Use deleteMany or individual delete
       await prisma.folder.delete({
         where: { id: folder.id }
-      }).catch(err => {
+      }).catch((err: unknown) => {
         // Might have already been cascade deleted if parent was deleted
       })
       deletedFoldersCount++

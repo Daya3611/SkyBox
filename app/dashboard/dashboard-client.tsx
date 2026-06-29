@@ -54,6 +54,7 @@ export default function DashboardClient({ user }: DashboardClientProps) {
   const [newFolderOpen, setNewFolderOpen] = useState(false)
   const [newFolderName, setNewFolderName] = useState('')
   const [newFolderLoading, setNewFolderLoading] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const fetchData = async () => {
     setLoading(true)
@@ -142,13 +143,15 @@ export default function DashboardClient({ user }: DashboardClientProps) {
         onCreateFolderClick={() => setNewFolderOpen(true)}
         onUploadClick={() => setUploadOpen(true)}
         userRole={user.role}
+        mobileMenuOpen={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
       />
 
       {/* Main Panel - Pushed by Sidebar width on desktop */}
       <main className="flex-1 flex flex-col md:ml-[280px] h-screen overflow-hidden">
         
         {/* Header - Stays above the canvas but within main */}
-        <Header user={user} />
+        <Header user={user} onMenuClick={() => setMobileMenuOpen(true)} />
 
         {/* Canvas - Scrollable content area */}
         <div className="flex-1 overflow-y-auto p-4 md:p-8 bg-surface-container-lowest scrollbar-thin">

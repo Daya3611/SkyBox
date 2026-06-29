@@ -25,9 +25,11 @@ interface SidebarProps {
   onCreateFolderClick: () => void
   onUploadClick: () => void
   userRole?: 'USER' | 'ADMIN' | 'SUPER_ADMIN'
+  mobileMenuOpen?: boolean
+  onClose?: () => void
 }
 
-export default function Sidebar({ onCreateFolderClick, onUploadClick, userRole = 'USER' }: SidebarProps) {
+export default function Sidebar({ onCreateFolderClick, onUploadClick, userRole = 'USER', mobileMenuOpen = false, onClose }: SidebarProps) {
   const pathname = usePathname()
   const [createMenuOpen, setCreateMenuOpen] = useState(false)
   
@@ -124,7 +126,15 @@ export default function Sidebar({ onCreateFolderClick, onUploadClick, userRole =
   }
 
   return (
-    <nav className="fixed left-0 top-0 h-full w-[280px] border-r border-outline-variant/50 bg-surface flex flex-col p-4 gap-2 z-40 hidden md:flex select-none">
+    <>
+      {/* Mobile Backdrop */}
+      {mobileMenuOpen && (
+        <div 
+          className="fixed inset-0 bg-on-surface/50 backdrop-blur-sm z-[60] md:hidden"
+          onClick={onClose}
+        />
+      )}
+      <nav className={`fixed left-0 top-0 h-full w-[280px] border-r border-outline-variant/50 bg-surface flex flex-col p-4 gap-2 z-[70] transition-transform duration-300 md:translate-x-0 select-none ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} md:flex`}>
 
       {/* Header */}
       <div className="flex items-center gap-2 px-2 py-4 mb-4">
@@ -178,6 +188,9 @@ export default function Sidebar({ onCreateFolderClick, onUploadClick, userRole =
             <Link
               key={item.name}
               href={item.href}
+              onClick={() => {
+                if (onClose) onClose()
+              }}
               className={`flex items-center gap-4 px-4 py-2 rounded-xl text-[12px] transition-transform duration-200 hover:translate-x-1 ${item.active
                 ? 'bg-secondary-container text-on-secondary-container font-semibold'
                 : 'text-on-surface-variant hover:bg-surface-container-low font-medium'
@@ -201,6 +214,9 @@ export default function Sidebar({ onCreateFolderClick, onUploadClick, userRole =
         </button>
         <Link
           href="/dashboard/settings"
+          onClick={() => {
+            if (onClose) onClose()
+          }}
           className="flex items-center gap-4 px-4 py-2 rounded-xl text-[12px] font-medium text-on-surface-variant hover:bg-surface-container-low transition-colors"
         >
           <Settings className="w-[18px] h-[18px] shrink-0" strokeWidth={2} />
@@ -216,5 +232,6 @@ export default function Sidebar({ onCreateFolderClick, onUploadClick, userRole =
       </div>
 
     </nav>
+    </>
   )
 }

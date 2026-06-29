@@ -66,7 +66,7 @@ export async function GET() {
       Other: { size: 0, count: 0 },
     }
 
-    mimeStats.forEach(stat => {
+    mimeStats.forEach((stat: any) => {
       const mime = stat.mimeType
       const size = stat._sum.size || 0
       const count = stat._count.id

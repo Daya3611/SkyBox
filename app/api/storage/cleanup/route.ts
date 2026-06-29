@@ -32,7 +32,7 @@ export async function GET() {
       select: { id: true, name: true, size: true, lastAccessedAt: true },
     })
 
-    // 3. Duplicate files (files with same checksum)
+    // 3. Duplicate files (files with Wsame checksum)
     const filesWithChecksum = await prisma.file.groupBy({
       by: ['checksum'],
       where: { userId, isDeleted: false, checksum: { not: null } },

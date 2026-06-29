@@ -168,6 +168,7 @@ model ActivityLog {
 model SubscriptionPlan {
   id           String   @id @default(cuid())
   name         String   @unique
+  description  String?
   storageLimit Float    // in bytes
   price        Float
   currency     String   @default("INR")

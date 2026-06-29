@@ -40,7 +40,7 @@ export async function GET() {
       having: { id: { _count: { gt: 1 } } }
     })
 
-    const duplicateChecksums = filesWithChecksum.map(f => f.checksum).filter(Boolean) as string[]
+    const duplicateChecksums = filesWithChecksum.map((f: any) => f.checksum).filter(Boolean) as string[]
     
     let duplicateFiles: any[] = []
     if (duplicateChecksums.length > 0) {

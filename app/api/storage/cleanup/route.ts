@@ -62,8 +62,8 @@ export async function GET() {
       }
     })
 
-    const emptyFolders = allFolders.filter(f => f._count.files === 0 && f._count.children === 0)
-      .map(f => ({ id: f.id, name: f.name }))
+    const emptyFolders = allFolders.filter((f: any) => f._count.files === 0 && f._count.children === 0)
+      .map((f: any) => ({ id: f.id, name: f.name }))
 
     return NextResponse.json({
       success: true,

@@ -30,6 +30,7 @@ export default function OverviewClient({ user }: OverviewClientProps) {
   const router = useRouter()
   const [stats, setStats] = useState<any>(null)
   const [recentFiles, setRecentFiles] = useState<FileItem[]>([])
+  const [activities, setActivities] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
   // Dialog toggles
@@ -39,9 +40,10 @@ export default function OverviewClient({ user }: OverviewClientProps) {
   useEffect(() => {
     async function fetchOverviewData() {
       try {
-        const [statsRes, filesRes] = await Promise.all([
+        const [statsRes, filesRes, activitiesRes] = await Promise.all([
           fetch('/api/storage/stats'),
-          fetch('/api/files?sort=date_desc')
+          fetch('/api/files?sort=date_desc'),
+          fetch('/api/activities?limit=4')
         ])
 
         if (statsRes.ok) {
@@ -53,6 +55,11 @@ export default function OverviewClient({ user }: OverviewClientProps) {
           const data = await filesRes.json()
           // Only show top 4 recent files
           if (data.files) setRecentFiles(data.files.slice(0, 4))
+        }
+        
+        if (activitiesRes.ok) {
+          const data = await activitiesRes.json()
+          if (data.success) setActivities(data.activities)
         }
       } catch (err) {
         console.error('Error fetching overview data:', err)
@@ -80,6 +87,88 @@ export default function OverviewClient({ user }: OverviewClientProps) {
     if (mime.includes('document') || mime.includes('pdf') || mime.includes('text')) return { icon: FileText, color: 'text-primary-container bg-primary/10' }
     if (mime.includes('zip') || mime.includes('rar')) return { icon: FileArchive, color: 'text-amber-600 bg-amber-50' }
     return { icon: File, color: 'text-outline bg-surface-container' }
+  }
+
+  const getActivityDetails = (activity: any) => {
+    let text = 'Performed an action'
+    let color = 'bg-outline-variant'
+    let parsedMetadata: any = {}
+    try {
+      parsedMetadata = JSON.parse(activity.metadata || '{}')
+    } catch (e) {}
+  
+    switch (activity.action) {
+      case 'CREATE_FOLDER':
+        text = `Created folder <span class="font-bold">${parsedMetadata.name || 'Unknown'}</span>`
+        color = 'bg-secondary-container'
+        break
+      case 'RENAME_FOLDER':
+        text = `Renamed folder to <span class="font-bold">${parsedMetadata.newName || 'Unknown'}</span>`
+        color = 'bg-secondary-container'
+        break
+      case 'DELETE_FOLDER':
+        text = 'Deleted a folder'
+        color = 'bg-error-container'
+        break
+      case 'SOFT_DELETE_FILE':
+        text = `Deleted file <span class="font-bold">${parsedMetadata.name || 'Unknown'}</span>`
+        color = 'bg-error-container'
+        break
+      case 'SOFT_DELETE_FOLDER':
+        text = 'Moved a folder to trash'
+        color = 'bg-error-container'
+        break
+      case 'RESTORE_FOLDER':
+        text = 'Restored a folder'
+        color = 'bg-primary-container'
+        break
+      case 'EMPTY_TRASH':
+        text = `Emptied trash (${parsedMetadata.filesCount || 0} items)`
+        color = 'bg-outline-variant'
+        break
+      case 'RENAME_FILE':
+        text = `Renamed file to <span class="font-bold">${parsedMetadata.newName || 'Unknown'}</span>`
+        color = 'bg-primary-container'
+        break
+      case 'MOVE_FILE':
+        text = 'Moved a file'
+        color = 'bg-primary-container'
+        break
+      case 'RESTORE_FILE':
+        text = `Restored file <span class="font-bold">${parsedMetadata.name || 'Unknown'}</span>`
+        color = 'bg-primary-container'
+        break
+      case 'FAVORITE_FILE':
+      case 'FAVORITE_FOLDER':
+        text = `Favorited <span class="font-bold">${parsedMetadata.name || 'an item'}</span>`
+        color = 'bg-amber-400'
+        break
+      case 'UNFAVORITE_FILE':
+      case 'UNFAVORITE_FOLDER':
+        text = `Unfavorited <span class="font-bold">${parsedMetadata.name || 'an item'}</span>`
+        color = 'bg-outline-variant'
+        break
+      case 'UPLOAD_FILE':
+        text = `Uploaded <span class="font-bold">${parsedMetadata.name || 'a file'}</span>`
+        color = 'bg-primary-container'
+        break
+    }
+    return { text, color }
+  }
+
+  const timeAgo = (dateString: string) => {
+    const date = new Date(dateString)
+    const now = new Date()
+    const seconds = Math.floor((now.getTime() - date.getTime()) / 1000)
+    
+    if (seconds < 60) return 'Just now'
+    const minutes = Math.floor(seconds / 60)
+    if (minutes < 60) return `${minutes} minute${minutes !== 1 ? 's' : ''} ago`
+    const hours = Math.floor(minutes / 60)
+    if (hours < 24) return `${hours} hour${hours !== 1 ? 's' : ''} ago`
+    const days = Math.floor(hours / 24)
+    if (days < 30) return `${days} day${days !== 1 ? 's' : ''} ago`
+    return date.toLocaleDateString()
   }
 
   const circumference = 2 * Math.PI * 15.9155
@@ -247,50 +336,32 @@ export default function OverviewClient({ user }: OverviewClientProps) {
                   <div className="flex flex-col gap-4">
                     <h2 className="text-lg font-semibold text-on-surface">Recent Activity</h2>
                     <div className="bg-surface/70 border border-outline-variant/30 rounded-[16px] p-4 flex flex-col gap-4 flex-1 shadow-sm">
-
-                      <div className="flex gap-3">
-                        <div className="flex flex-col items-center mt-1">
-                          <div className="w-2 h-2 rounded-full bg-primary-container"></div>
-                          <div className="w-px h-full bg-outline-variant/50 my-1"></div>
+                      {activities.length > 0 ? (
+                        activities.map((activity, index) => {
+                          const { text, color } = getActivityDetails(activity)
+                          const isLast = index === activities.length - 1
+                          
+                          return (
+                            <div key={activity.id} className="flex gap-3">
+                              <div className="flex flex-col items-center mt-1">
+                                <div className={`w-2 h-2 rounded-full ${color}`}></div>
+                                {!isLast && <div className="w-px h-full bg-outline-variant/50 my-1"></div>}
+                              </div>
+                              <div className={`flex flex-col text-sm ${!isLast ? 'pb-2' : ''}`}>
+                                <span 
+                                  className="text-on-surface font-medium" 
+                                  dangerouslySetInnerHTML={{ __html: text }}
+                                />
+                                <span className="text-xs font-semibold text-on-surface-variant mt-0.5">{timeAgo(activity.createdAt)}</span>
+                              </div>
+                            </div>
+                          )
+                        })
+                      ) : (
+                        <div className="text-center text-sm text-on-surface-variant my-auto">
+                          No recent activity
                         </div>
-                        <div className="flex flex-col pb-2 text-sm">
-                          <span className="text-on-surface font-medium">You uploaded <span className="font-bold">Q3_Report.pdf</span></span>
-                          <span className="text-xs font-semibold text-on-surface-variant mt-0.5">2 hours ago</span>
-                        </div>
-                      </div>
-
-                      <div className="flex gap-3">
-                        <div className="flex flex-col items-center mt-1">
-                          <div className="w-2 h-2 rounded-full bg-secondary-container"></div>
-                          <div className="w-px h-full bg-outline-variant/50 my-1"></div>
-                        </div>
-                        <div className="flex flex-col pb-2 text-sm">
-                          <span className="text-on-surface font-medium">Sarah edited <span className="font-bold">Design_System.fig</span></span>
-                          <span className="text-xs font-semibold text-on-surface-variant mt-0.5">Yesterday at 4:30 PM</span>
-                        </div>
-                      </div>
-
-                      <div className="flex gap-3">
-                        <div className="flex flex-col items-center mt-1">
-                          <div className="w-2 h-2 rounded-full bg-error-container"></div>
-                          <div className="w-px h-full bg-outline-variant/50 my-1"></div>
-                        </div>
-                        <div className="flex flex-col pb-2 text-sm">
-                          <span className="text-on-surface font-medium">Shared <span className="font-bold">Product_Demo.mp4</span></span>
-                          <span className="text-xs font-semibold text-on-surface-variant mt-0.5">Yesterday at 2:15 PM</span>
-                        </div>
-                      </div>
-
-                      <div className="flex gap-3">
-                        <div className="flex flex-col items-center mt-1">
-                          <div className="w-2 h-2 rounded-full bg-outline-variant"></div>
-                        </div>
-                        <div className="flex flex-col text-sm">
-                          <span className="text-on-surface font-medium">System backed up <span className="font-bold">14 items</span></span>
-                          <span className="text-xs font-semibold text-on-surface-variant mt-0.5">Yesterday at 2:00 AM</span>
-                        </div>
-                      </div>
-
+                      )}
                     </div>
                   </div>
 
